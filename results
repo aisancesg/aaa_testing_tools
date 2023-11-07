@@ -1,6 +1,6 @@
 # Результаты пяти заданий
 ## Задание 1
-C:\Users\User\tools_of_testing>python -m doctest -v -o=ELLIPSIS -o=NORMALIZE_WHITESPACE test1.py
+C:\Users\User\aaa_testing_tools>python -m doctest -v -o=ELLIPSIS -o=NORMALIZE_WHITESPACE test1.py
 Trying:
     encode('SOS')
 Expecting:
@@ -11,7 +11,7 @@ Trying:
 Expecting:
     '-.-.-.'
 **********************************************************************
-File "C:\Users\User\tools_of_testing\test1.py", line 8, in test1.test_encode
+File "C:\Users\User\aaa_testing_tools\test1.py", line 8, in test1.test_encode
 Failed example:
     encode(';') # Будет ошибка, тк нет кодировки для ';'
 Exception raised:
@@ -21,10 +21,10 @@ Exception raised:
       File "<doctest test1.test_encode[1]>", line 1, in <module>
         encode(';') # Будет ошибка, тк нет кодировки для ';'
         ^^^^^^^^^^^
-      File "C:\Users\User\tools_of_testing\morse.py", line 31, in encode
+      File "C:\Users\User\aaa_testing_tools\morse.py", line 31, in encode
         encoded_signs = [
                         ^
-      File "C:\Users\User\tools_of_testing\morse.py", line 32, in <listcomp>
+      File "C:\Users\User\aaa_testing_tools\morse.py", line 32, in <listcomp>
         LETTER_TO_MORSE[letter] for letter in message
         ~~~~~~~~~~~~~~~^^^^^^^^
     KeyError: ';'
@@ -38,11 +38,12 @@ Exception raised:
 ***Test Failed*** 1 failures.
 
 
+
 ## Задание 2
-C:\Users\User\tools_of_testing>python -m pytest test2.py
+C:\Users\User\aaa_testing_tools>python -m pytest test2.py
 ================================================= test session starts =================================================
 platform win32 -- Python 3.11.3, pytest-7.4.3, pluggy-1.3.0
-rootdir: C:\Users\User\tools_of_testing
+rootdir: C:\Users\User\aaa_testing_tools
 plugins: anyio-3.6.2, cov-4.1.0
 collected 3 items
 
@@ -70,7 +71,7 @@ morse.py:42: in decode
     decoded_letters = [
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
-.0 = <list_iterator object at 0x000001F377AB66E0>
+.0 = <list_iterator object at 0x0000025CAC0B6620>
 
     decoded_letters = [
 >       MORSE_TO_LETTER[letter] for letter in morse_message.split()
@@ -80,11 +81,12 @@ E   KeyError: '-.-.-.'
 morse.py:43: KeyError
 =============================================== short test summary info ===============================================
 FAILED test2.py::test_decode[-.-.-.-;] - KeyError: '-.-.-.'
-============================================= 1 failed, 2 passed in 0.38s =============================================
+============================================= 1 failed, 2 passed in 0.40s =============================================
 
-      
+
+
 ## Задание 3
-C:\Users\User\tools_of_testing>python -m unittest -v test3.py
+C:\Users\User\aaa_testing_tools>python -m unittest -v test3.py
 test_1 (test3.TestFitTransform.test_1) ... ok
 test_2 (test3.TestFitTransform.test_2) ... ok
 test_3 (test3.TestFitTransform.test_3) ...
@@ -96,26 +98,28 @@ ok
 test_4 (test3.TestFitTransform.test_4) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.008s
+Ran 4 tests in 0.011s
 
 OK
 
-      
+
+
 ## Задание 4
-C:\Users\User\tools_of_testing>python -m pytest test4.py
+C:\Users\User\aaa_testing_tools>python -m pytest test4.py
 ================================================= test session starts =================================================
 platform win32 -- Python 3.11.3, pytest-7.4.3, pluggy-1.3.0
-rootdir: C:\Users\User\tools_of_testing
+rootdir: C:\Users\User\aaa_testing_tools
 plugins: anyio-3.6.2, cov-4.1.0
 collected 4 items
 
 test4.py ....                                                                                                    [100%]
 
-================================================== 4 passed in 0.04s ==================================================
+================================================== 4 passed in 0.05s ==================================================
 
-      
+
+
 ## Задание 5
-C:\Users\User\tools_of_testing>python -m pytest -q test5.py --cov=what_is_year_now
+C:\Users\User\aaa_testing_tools>python -m pytest -q test5.py --cov=what_is_year_now
 ...                                                                                                              [100%]
 
 ---------- coverage: platform win32, python 3.11.3-final-0 -----------
@@ -125,12 +129,12 @@ what_is_year_now.py      19      0   100%
 -----------------------------------------
 TOTAL                    19      0   100%
 
-3 passed in 0.13s
+3 passed in 0.16s
 
-C:\Users\User\tools_of_testing>python -m pytest -q test5.py --cov=what_is_year_now --cov-report=html
+C:\Users\User\aaa_testing_tools>python -m pytest -q test5.py --cov=what_is_year_now --cov-report=html
 ...                                                                                                              [100%]
 
 ---------- coverage: platform win32, python 3.11.3-final-0 -----------
 Coverage HTML written to dir htmlcov
 
-3 passed in 0.16s
+3 passed in 0.21s
