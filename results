@@ -1,0 +1,136 @@
+# Результаты пяти заданий
+## Задание 1
+C:\Users\User\tools_of_testing>python -m doctest -v -o=ELLIPSIS -o=NORMALIZE_WHITESPACE test1.py
+Trying:
+    encode('SOS')
+Expecting:
+    '... --- ...'
+ok
+Trying:
+    encode(';') # Будет ошибка, тк нет кодировки для ';'
+Expecting:
+    '-.-.-.'
+**********************************************************************
+File "C:\Users\User\tools_of_testing\test1.py", line 8, in test1.test_encode
+Failed example:
+    encode(';') # Будет ошибка, тк нет кодировки для ';'
+Exception raised:
+    Traceback (most recent call last):
+      File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\doctest.py", line 1351, in __run
+        exec(compile(example.source, filename, "single",
+      File "<doctest test1.test_encode[1]>", line 1, in <module>
+        encode(';') # Будет ошибка, тк нет кодировки для ';'
+        ^^^^^^^^^^^
+      File "C:\Users\User\tools_of_testing\morse.py", line 31, in encode
+        encoded_signs = [
+                        ^
+      File "C:\Users\User\tools_of_testing\morse.py", line 32, in <listcomp>
+        LETTER_TO_MORSE[letter] for letter in message
+        ~~~~~~~~~~~~~~~^^^^^^^^
+    KeyError: ';'
+1 items had no tests:
+    test1
+**********************************************************************
+1 items had failures:
+   1 of   2 in test1.test_encode
+2 tests in 2 items.
+1 passed and 1 failed.
+***Test Failed*** 1 failures.
+
+
+## Задание 2
+C:\Users\User\tools_of_testing>python -m pytest test2.py
+================================================= test session starts =================================================
+platform win32 -- Python 3.11.3, pytest-7.4.3, pluggy-1.3.0
+rootdir: C:\Users\User\tools_of_testing
+plugins: anyio-3.6.2, cov-4.1.0
+collected 3 items
+
+test2.py ..F                                                                                                     [100%]
+
+====================================================== FAILURES =======================================================
+________________________________________________ test_decode[-.-.-.-;] ________________________________________________
+
+morse_message = '-.-.-.', decoded_message = ';'
+
+    @pytest.mark.parametrize(
+        "morse_message,decoded_message",
+        [
+            ('... --- ...', 'SOS'),
+            ('... - ..- -.. . -. -', 'STUDENT'),
+            ('-.-.-.', ';')  # не сработает, тк нет кодировки для ';'
+        ]
+    )
+    def test_decode(morse_message: str, decoded_message: str) -> None:
+>       assert decode(morse_message) == decoded_message
+
+test2.py:14:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+morse.py:42: in decode
+    decoded_letters = [
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+.0 = <list_iterator object at 0x000001F377AB66E0>
+
+    decoded_letters = [
+>       MORSE_TO_LETTER[letter] for letter in morse_message.split()
+    ]
+E   KeyError: '-.-.-.'
+
+morse.py:43: KeyError
+=============================================== short test summary info ===============================================
+FAILED test2.py::test_decode[-.-.-.-;] - KeyError: '-.-.-.'
+============================================= 1 failed, 2 passed in 0.38s =============================================
+
+      
+## Задание 3
+C:\Users\User\tools_of_testing>python -m unittest -v test3.py
+test_1 (test3.TestFitTransform.test_1) ... ok
+test_2 (test3.TestFitTransform.test_2) ... ok
+test_3 (test3.TestFitTransform.test_3) ...
+ AssertionError in test_3:
+ input: ['T-shirt', 'dress', 'sweater', 'skirt', 'jeans'],
+ expected: [('sweater', [0, 0, 0, 0, 1]), ('skirt', [0, 0, 0, 1, 0]), ('jeans', [0, 0, 1, 0, 0]), ('T-shirt', [0, 1, 0, 0, 0]), ('dress', [1, 0, 0, 0, 0])],
+ got: [('T-shirt', [0, 0, 0, 0, 1]), ('dress', [0, 0, 0, 1, 0]), ('sweater', [0, 0, 1, 0, 0]), ('skirt', [0, 1, 0, 0, 0]), ('jeans', [1, 0, 0, 0, 0])]
+ok
+test_4 (test3.TestFitTransform.test_4) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.008s
+
+OK
+
+      
+## Задание 4
+C:\Users\User\tools_of_testing>python -m pytest test4.py
+================================================= test session starts =================================================
+platform win32 -- Python 3.11.3, pytest-7.4.3, pluggy-1.3.0
+rootdir: C:\Users\User\tools_of_testing
+plugins: anyio-3.6.2, cov-4.1.0
+collected 4 items
+
+test4.py ....                                                                                                    [100%]
+
+================================================== 4 passed in 0.04s ==================================================
+
+      
+## Задание 5
+C:\Users\User\tools_of_testing>python -m pytest -q test5.py --cov=what_is_year_now
+...                                                                                                              [100%]
+
+---------- coverage: platform win32, python 3.11.3-final-0 -----------
+Name                  Stmts   Miss  Cover
+-----------------------------------------
+what_is_year_now.py      19      0   100%
+-----------------------------------------
+TOTAL                    19      0   100%
+
+3 passed in 0.13s
+
+C:\Users\User\tools_of_testing>python -m pytest -q test5.py --cov=what_is_year_now --cov-report=html
+...                                                                                                              [100%]
+
+---------- coverage: platform win32, python 3.11.3-final-0 -----------
+Coverage HTML written to dir htmlcov
+
+3 passed in 0.16s
