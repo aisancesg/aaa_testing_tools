@@ -26,7 +26,14 @@ MORSE_TO_LETTER = {
 
 def encode(message: str) -> str:
     """
-    Кодирует строку в соответсвие с таблицей азбуки Морзе
+    Кодирует строку в соответствии с таблицей азбуки Морзе
+
+    >>> encode('SOS')
+    '... --- ...'
+    >>> encode(';') # Будет ошибка, тк нет кодировки для ';'
+    '-.-.-.'
+    >>> encode('MY NAME IS ...') # doctest: +ELLIPSIS
+    '-- -.-- ...'
     """
     encoded_signs = [
         LETTER_TO_MORSE[letter] for letter in message

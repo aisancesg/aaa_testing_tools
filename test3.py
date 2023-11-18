@@ -3,7 +3,10 @@ import unittest
 
 
 class TestFitTransform(unittest.TestCase):
-    def test_1(self):
+    def test_correct_countries(self):
+        """
+        Проверим, работает ли fit_transform так, как мы ожидаем на примере
+        """
         countries = ['Russia', 'USA', 'England', 'Denmark']
         expected = [
             ('Russia', [0, 0, 0, 1]),
@@ -13,43 +16,64 @@ class TestFitTransform(unittest.TestCase):
         ]
         self.assertEqual(fit_transform(countries), expected)
 
-    def test_2(self):
-        meals = ['breakfast', 'lunch', 'dinner']
-        incorrect_res = [
-            ('breakfast', [0, 1, 0]),
-            ('lunch', [0, 0, 1]),
-            ('dinner', [1, 0, 0])
-        ]
-        self.assertNotEqual(fit_transform(meals), incorrect_res)
-
-    def test_3(self):  # с перехватом исключения
-        clothes = ['T-shirt', 'dress', 'sweater', 'skirt', 'jeans']
-        res = [
-            ('sweater', [0, 0, 0, 0, 1]),
-            ('skirt', [0, 0, 0, 1, 0]),
-            ('jeans', [0, 0, 1, 0, 0]),
-            ('T-shirt', [0, 1, 0, 0, 0]),
-            ('dress', [1, 0, 0, 0, 0])
-        ]
-        transformed_clothes = fit_transform(clothes)
-        try:
-            self.assertEqual(transformed_clothes, res)
-        except AssertionError:
-            print(f'\n AssertionError in test_3: '
-                  f'\n input: {clothes}, '
-                  f'\n expected: {res}, '
-                  f'\n got: {transformed_clothes}')
-
-    def test_4(self):
+    def test_correct_furniture(self):
+        """
+        Проверим, работает ли fit_transform так, как мы ожидаем на примере
+        """
         furniture = ['bed', 'armchair', 'desk', 'bookshelf', 'table']
-        res = [
+        expected = [
+            ('bed', [0, 0, 0, 0, 1]),
+            ('armchair', [0, 0, 0, 1, 0]),
             ('desk', [0, 0, 1, 0, 0]),
             ('bookshelf', [0, 1, 0, 0, 0]),
-            ('table', [1, 0, 0, 0, 0]),
-            ('bed', [0, 0, 0, 0, 1]),
-            ('armchair', [0, 0, 0, 1, 0])
+            ('table', [1, 0, 0, 0, 0])
         ]
-        self.assertNotIn(fit_transform(furniture), res)
+        self.assertEqual(fit_transform(furniture), expected)
+
+    def test_correct_clothes(self):
+        """
+        Проверим, работает ли fit_transform так, как мы ожидаем на примере
+        """
+        clothes = ['T-shirt', 'dress', 'sweater', 'skirt', 'jeans']
+        expected = [
+            ('T-shirt', [0, 0, 0, 0, 1]),
+            ('dress', [0, 0, 0, 1, 0]),
+            ('sweater', [0, 0, 1, 0, 0]),
+            ('skirt', [0, 1, 0, 0, 0]),
+            ('jeans', [1, 0, 0, 0, 0])
+        ]
+        self.assertEqual(fit_transform(clothes), expected)
+
+    def test_correct_seasons(self):
+        """
+        Проверим, работает ли fit_transform так, как мы ожидаем на примере
+        """
+        seasons = ['winter', 'spring', 'summer', 'autumn']
+        expected = [
+            ('winter', [0, 0, 0, 1]),
+            ('spring', [0, 0, 1, 0]),
+            ('summer', [0, 1, 0, 0]),
+            ('autumn', [1, 0, 0, 0])
+        ]
+        self.assertEqual(fit_transform(seasons), expected)
+
+    def test_types(self):
+        """
+        Проверим, ожидаемый ли тип результата fit_transform
+        """
+        meals = ['breakfast', 'lunch', 'dinner']
+        res = fit_transform(meals)
+        self.assertIsInstance(res, list)
+        self.assertIsInstance(res[0], tuple)
+
+    def test_empty(self):
+        """
+        Тест с перехватом исключения
+        """
+        try:
+            fit_transform()
+        except TypeError:
+            self.assertRaises(TypeError)
 
 
 if __name__ == '__main__':
