@@ -11,10 +11,10 @@ cd aaa_testing_tools
 Запускаем при помощи команды
 
 ```
-python -m doctest -v -o=ELLIPSIS -o=NORMALIZE_WHITESPACE test1.py
+python -m doctest -o NORMALIZE_WHITESPACE -v morse.py
 ```
 
-Первый тест отрабатывает успешно, а второй тест выдает ошибку, так как нет кодировки для ';'.
+Первый и третий тесты отрабатывают успешно, а второй тест выдает ошибку, так как нет кодировки для ';'.
 
 ## Задание 2
 
