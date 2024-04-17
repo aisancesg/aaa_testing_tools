@@ -1,0 +1,150 @@
+# Результаты пяти заданий
+## Задание 1
+C:\Users\User\aaa_testing_tools>python -m doctest -o NORMALIZE_WHITESPACE -v morse.py
+Trying:
+    encode('SOS')
+Expecting:
+    '... --- ...'
+ok
+Trying:
+    encode(';') # Будет ошибка, тк нет кодировки для ';'
+Expecting:
+    '-.-.-.'
+**********************************************************************
+File "C:\Users\User\aaa_testing_tools\morse.py", line 33, in morse.encode
+Failed example:
+    encode(';') # Будет ошибка, тк нет кодировки для ';'
+Exception raised:
+    Traceback (most recent call last):
+      File "C:\Users\User\AppData\Local\Programs\Python\Python311\Lib\doctest.py", line 1351, in __run
+        exec(compile(example.source, filename, "single",
+      File "<doctest morse.encode[1]>", line 1, in <module>
+        encode(';') # Будет ошибка, тк нет кодировки для ';'
+        ^^^^^^^^^^^
+      File "C:\Users\User\aaa_testing_tools\morse.py", line 38, in encode
+        encoded_signs = [
+                        ^
+      File "C:\Users\User\aaa_testing_tools\morse.py", line 39, in <listcomp>
+        LETTER_TO_MORSE[letter] for letter in message
+        ~~~~~~~~~~~~~~~^^^^^^^^
+    KeyError: ';'
+Trying:
+    encode('MY NAME IS ...') # doctest: +ELLIPSIS
+Expecting:
+    '-- -.-- ...'
+ok
+2 items had no tests:
+    morse
+    morse.decode
+**********************************************************************
+1 items had failures:
+   1 of   3 in morse.encode
+3 tests in 3 items.
+2 passed and 1 failed.
+***Test Failed*** 1 failures.
+
+
+
+
+## Задание 2
+C:\Users\User\aaa_testing_tools>python -m pytest test2.py
+================================================= test session starts =================================================
+platform win32 -- Python 3.11.3, pytest-7.4.3, pluggy-1.3.0
+rootdir: C:\Users\User\aaa_testing_tools
+plugins: anyio-3.6.2, cov-4.1.0
+collected 3 items
+
+test2.py ..F                                                                                                     [100%]
+
+====================================================== FAILURES =======================================================
+________________________________________________ test_decode[-.-.-.-;] ________________________________________________
+
+morse_message = '-.-.-.', decoded_message = ';'
+
+    @pytest.mark.parametrize(
+        "morse_message,decoded_message",
+        [
+            ('... --- ...', 'SOS'),
+            ('... - ..- -.. . -. -', 'STUDENT'),
+            ('-.-.-.', ';')  # не сработает, тк нет кодировки для ';'
+        ]
+    )
+    def test_decode(morse_message: str, decoded_message: str) -> None:
+>       assert decode(morse_message) == decoded_message
+
+test2.py:14:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+morse.py:49: in decode
+    decoded_letters = [
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+.0 = <list_iterator object at 0x0000023D4A4D6230>
+
+    decoded_letters = [
+>       MORSE_TO_LETTER[letter] for letter in morse_message.split()
+    ]
+E   KeyError: '-.-.-.'
+
+morse.py:50: KeyError
+=============================================== short test summary info ===============================================
+FAILED test2.py::test_decode[-.-.-.-;] - KeyError: '-.-.-.'
+============================================= 1 failed, 2 passed in 0.41s =============================================
+
+
+
+## Задание 3
+C:\Users\User\aaa_testing_tools>python -m unittest -v test3.py
+test_correct_clothes (test3.TestFitTransform.test_correct_clothes)
+Проверим, работает ли fit_transform так, как мы ожидаем на примере ... ok
+test_correct_countries (test3.TestFitTransform.test_correct_countries)
+Проверим, работает ли fit_transform так, как мы ожидаем на примере ... ok
+test_correct_furniture (test3.TestFitTransform.test_correct_furniture)
+Проверим, работает ли fit_transform так, как мы ожидаем на примере ... ok
+test_correct_seasons (test3.TestFitTransform.test_correct_seasons)
+Проверим, работает ли fit_transform так, как мы ожидаем на примере ... ok
+test_empty (test3.TestFitTransform.test_empty)
+Тест с перехватом исключения ... ok
+test_types (test3.TestFitTransform.test_types)
+Проверим, ожидаемый ли тип результата fit_transform ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.009s
+
+OK
+
+
+
+## Задание 4
+C:\Users\User\aaa_testing_tools>python -m pytest test4.py
+================================================= test session starts =================================================
+platform win32 -- Python 3.11.3, pytest-7.4.3, pluggy-1.3.0
+rootdir: C:\Users\User\aaa_testing_tools
+plugins: anyio-3.6.2, cov-4.1.0
+collected 6 items
+
+test4.py ......                                                                                                  [100%]
+
+================================================== 6 passed in 0.06s ==================================================
+
+
+
+## Задание 5
+C:\Users\User\aaa_testing_tools>python -m pytest -q test5.py --cov=what_is_year_now
+...                                                                                                              [100%]
+
+---------- coverage: platform win32, python 3.11.3-final-0 -----------
+Name                  Stmts   Miss  Cover
+-----------------------------------------
+what_is_year_now.py      19      0   100%
+-----------------------------------------
+TOTAL                    19      0   100%
+
+3 passed in 0.16s
+
+C:\Users\User\aaa_testing_tools>python -m pytest -q test5.py --cov=what_is_year_now --cov-report=html
+...                                                                                                              [100%]
+
+---------- coverage: platform win32, python 3.11.3-final-0 -----------
+Coverage HTML written to dir htmlcov
+
+3 passed in 0.25s
