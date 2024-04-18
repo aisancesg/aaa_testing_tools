@@ -1,3 +1,5 @@
+# Условия заданий 
+https://github.com/siauPatrick/mai-python/blob/master/03-instrumenty-testirovaniya-v-python/issues.md
 # Инструкция
 
 Для начала перейдем в директорию aaa_testing_tools:
